@@ -1,0 +1,72 @@
+<h3>Reactive Customer Form</h3>
+<div class ="container">
+  <form novalidate  
+  (ngSubmit)="save()" [formGroup]="customerForm">
+    <div class="row form-group">
+    <label for="firstNameId" class="col-md-1">FirstName</label>
+    <input type="text" id="firstNameId"
+     placeholder="First Name(required)"  
+    class="form-control col-md-5" 
+    formControlName="firstName"     
+    />
+   <span *ngIf="(customerForm.get('firstName').touched||
+   customerForm.get('firstName').dirty) && 
+   customerForm.get('firstName').errors"
+   >
+      <span 
+      *ngIf="customerForm.get('firstName').errors.required">
+      Please Enter your First Name
+    </span>
+    <span
+    *ngIf="customerForm.get('firstName').errors.minlength"
+    >
+    Min length for First Name is 3
+  </span>
+   </span> 
+    </div>
+    <div class="row form-group">
+        <label for="lastNameId" class="col-md-1">LastName</label>
+        <input type="text" id="lastNameId"
+         placeholder="Last Name(required)"
+             formControlName="lastName"
+        class="form-control col-md-5"
+        />  
+           
+        </div>
+       <br>
+       <br>
+        <div class="row form-group">
+            <label for="emailId" class="col-md-1">Email</label>
+            <input type="email" id="emailId"
+             placeholder="abc@xyz"             
+            class="form-control col-md-5"
+            formControlName="email"         
+          
+            />
+            </div>
+
+            <div class="form-group">
+              <div class="offset-md-2 col-md-4">
+                <button class="btn btn-primary"
+                type="submit"
+                 [title]="customerForm.valid?
+                 'Save the form data':
+                 'Disabled until valid form data'"
+                  [disabled]="!customerForm.valid">
+                Save
+              </button>
+              </div>
+              <div>
+                <button class="btn btn-warning"
+                 (click)="populateTestData()" >Test</button>
+              </div>
+
+            </div>
+  </form>
+
+</div>
+<br>Dirty :{{customerForm.dirty}}
+<br>Touched :{{customerForm.touched}}
+<br>Valid :{{customerForm.valid}}
+<br>Value :{{customerForm.value|json}}
+

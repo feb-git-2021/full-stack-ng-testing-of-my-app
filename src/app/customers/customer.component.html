@@ -1,0 +1,61 @@
+<h3>Template - Driven Customer Form</h3>
+<div class ="container">
+  <form novalidate #signupForm="ngForm" 
+  (ngSubmit)="save(signupForm)">
+    <div class="row form-group">
+    <label for="firstNameId" class="col-md-1">FirstName</label>
+    <input type="text" id="firstNameId"
+     placeholder="First Name(required)"
+    required minlength="3" name="firstName"
+    class="form-control col-md-5"
+    #firstNameVar="ngModel"
+     [(ngModel)]="customer.firstName"
+    />
+    
+    </div>
+    <div class="row form-group">
+        <label for="lastNameId" class="col-md-1">LastName</label>
+        <input type="text" id="lastNameId"
+         placeholder="Last Name(required)"
+        required name="lastName"
+        #lastNameVar="ngModel"
+        [(ngModel)]="customer.lastName" 
+        class="form-control col-md-5"
+        />  
+  <span *ngIf="!firstNameVar.valid && firstNameVar.touched">
+           First Name is in-valid
+          </span>      
+        </div>
+       <br>
+       <br>
+        <div class="row form-group">
+            <label for="emailId" class="col-md-1">Email</label>
+            <input type="email" id="emailId"
+             placeholder="abc@xyz"             
+            class="form-control col-md-5"
+            name="email"
+            #emailVar="ngModel"
+            [(ngModel)]="customer.email"
+            />
+            </div>
+
+            <div class="form-group">
+              <div class="offset-md-2 col-md-4">
+                <button class="btn btn-primary"
+                type="submit"
+                 [title]="signupForm.valid?
+                 'Save the form data':
+                 'Disabled until valid form data'"
+                  [disabled]="!signupForm.valid">
+                Save
+              </button>
+              </div>
+
+            </div>
+  </form>
+
+</div>
+<br>Dirty :{{signupForm.dirty}}
+<br>Touched :{{signupForm.touched}}
+<br>Valid :{{signupForm.valid}}
+<br>Value :{{signupForm.value|json}}
